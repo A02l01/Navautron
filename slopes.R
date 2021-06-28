@@ -23,7 +23,6 @@ compute_slope<-function(d,N,myfile){
     if(mpass == F){
       sd = subset(d,subset=c(UId==uy))
       min = 0 
-      ## avant c'etait *0.5
       mm = max(sd$S)*0.5
       mm = (max(sd$S)-min(sd$S))*0.5
       ts = sd$t[which.max(abs(sd$S))]
@@ -102,79 +101,3 @@ compute_slope<-function(d,N,myfile){
   return(rout)
 }
 
-compute_N_slope<-function(d,N,myfile,nId,target){
-  rout=NULL
-  deja = NULL
-  if(file.exists(myfile)){
-    deja = read.csv(myfile,sep='\t',header=F)
-  }
-    uy = as.character(nId)
-    mpass=F
-    if(mpass == F){
-      print(uy)
-      sd = subset(d,subset=c(UId==uy))
-      min = 0 
-      ## avant c'etait *0.5
-      mm = max(sd$S)*0.5
-      mm = (max(sd$S)-min(sd$S))*0.5
-      ts = sd$t[which.max(abs(sd$S))]
-      ssd = subset(sd,subset=c(t<ts))
-      max = ssd$t[which.min(abs(ssd$S-mm))]
-      span=30
-      mfit = with(sd,ksmooth(t,S,kernel = "normal",bandwidth = span))
-      
-      p = ggplot()+geom_point(data=sd,aes(x=t,y=S),alpha=0.3)+
-        geom_line(aes(x=sd$t,y=mfit$y),color='black')+
-        theme_bw()+ggtitle(uy)+
-        geom_vline(xintercept = max,color='red')
-      print(p)
-      sd$Sb = as.numeric(mfit$y)
-      mv = NULL
-      pb <- progress_bar$new(total = 300)
-      
-      
-      for(kk in 1:300){
-        pb$tick()
-        pivot = sample(80:130,1)
-        min = sample(pivot-30,1)
-        max = sample(pivot+30:300,1)
-
-        sd = subset(d,subset=c(UId==uy))
-        sd$Sb = as.numeric(mfit$y)
-        sd = subset(sd,subset=c(UId==uy & t>min & t < max))
-        N = N+1
-        x = sd$t
-        y = log(sd$Sb+1E-9)
-        y[which(y==-Inf)] = NA
-        
-        
-        for(jj in 1:1){
-          out.lm = lm(y~x)
-          o <- segmented(out.lm, seg.Z = ~ x)
-          fit <- numeric(length(x)) * NA
-          fit[complete.cases(rowSums(cbind(y, x)))] <- broken.line(o)$fit
-          if(jj == 1){
-            val = sd(o$residuals)
-            y[which(o$residuals > val | o$residuals < -val)]=NA
-          }
-        }
-        o$coefficients
-          
-            
-        data1 <- data.frame(x =x, y = y, fit = fit)
-        res = slope(o)
-          
-        mv = rbind(mv,c(res$x[2,1],abs(res$x[2,1]-target)))
-        if(abs(res$x[2,1]-target)<5E-4){
-          break
-        }
-      }#end loop random
-        
-      mv = data.frame(mv)
-      answer = 'o'
-      rout = rbind(rout,c(uy,o$psi[[2]],mv$X1[which(mv$X2==min(mv$X2))],sd$mod[1],answer))
-      line = paste(uy,o$psi[[2]],mv$X1[which(mv$X2==min(mv$X2))],answer,sep="\t")
-      print(line)
-    }## fin uy
-  return(rout)
-}
