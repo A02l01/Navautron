@@ -15,5 +15,6 @@ sclerotiorum using time‐resolved automated phenotyping . Plant J., 1–15 (202
       - In a first step distortion and intrinsics camera matrix must be computed on the basis of ~15 pictures of a grid (grille_calibration.svg). 
  The script to_calibrate_a_cam.py can be modify (an alternative is using calibration software such as https://github.com/Abhijit-2592/camera_calibration_API). 
       - In second step, pictures must be undistorded on the basis on the latter matrix using image_calibration.py script (or other script available on internet).
+  - **compute_slope** directory contains R code to compute susceptibility. This script is on purpose mostly manual.
   
   Good luck
