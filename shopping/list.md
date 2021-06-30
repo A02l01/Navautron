@@ -10,7 +10,9 @@ https://www.amazon.fr/ELP-Webcam/dp/B07G9CJDCK/ref=sr_1_3?__mk_fr_FR=%C3%85M%C3%
 
 https://www.amazon.fr/ELP-R%C3%A9glable-Variable-2-8-12mm-Objectif/dp/B07PHJYWN4/ref=psdc_2908498031_t4_B07G9CJDCK
 
-    - If more than 1 cam plugged per RPi an external USB hub with external power supply is required (to have 5V, 2A per camera) (20€ - 30€)
+
+   - If more than 1 cam plugged per RPi an external USB hub with external power supply is required (to have 5V, 2A per camera) (20€ - 30€)
+    
 https://www.amazon.fr/RSHTECH-Aluminium-commutateur-individuel-alimentation/dp/B07KFG8PPR/ref=sr_1_19_sspa?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=usb+multi&qid=1625039751&sr=8-19-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyTVNDVTlLMzJURTZBJmVuY3J5cHRlZElkPUExMDMzMzMxMllGUEIzRU9ZOFIxNyZlbmNyeXB0ZWRBZElkPUEwMzU5MjQ0MTRYMzE2R1UwSzZBQSZ3aWRnZXROYW1lPXNwX210ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=
 
 - RPi (70€ - 100 €)
